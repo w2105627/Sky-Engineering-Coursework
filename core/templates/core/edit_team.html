@@ -1,0 +1,18 @@
+<!-- Author : w2105627 -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Edit {{ team.team_name }}</h1>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Update Team</button>
+</form>
+
+<br>
+
+<a href="{% url 'core:team_detail' team.id %}">Back to Team</a>
+
+{% endblock %}

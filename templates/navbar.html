@@ -1,0 +1,21 @@
+<!-- Author : w2105627 -->
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <a class="navbar-brand" href="{% url 'core:teams' %}">Sky Engineering Teams</a>
+
+        <div class="d-flex align-items-center">
+            <a class="btn btn-outline-light me-2" href="{% url 'core:teams' %}">Teams</a>
+            <a class="btn btn-outline-light me-2" href="{% url 'core:organisation' %}">Organisation</a>
+            <a class="btn btn-outline-light me-2" href="{% url 'core:departments' %}">Departments</a>
+            <a class="btn btn-outline-light" href="/admin/">Admin</a>
+            {% if user.is_authenticated %}
+                <a class="btn btn-outline-light ms-2" href="{% url 'accounts:profile' %}">Profile</a>
+                <a class="btn btn-outline-light ms-2" href="{% url 'accounts:logout' %}">Logout</a>
+            {% else %}
+                <a class="btn btn-outline-light ms-2" href="{% url 'accounts:login' %}">Login</a>
+                <a class="btn btn-outline-light ms-2" href="{% url 'accounts:signup' %}">Sign Up</a>
+            {% endif %}
+        </div>
+    </div>
+</nav>
+<hr>

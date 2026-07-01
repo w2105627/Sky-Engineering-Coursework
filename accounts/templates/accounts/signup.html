@@ -1,0 +1,66 @@
+<!-- Author : w2105627 -->
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Sign Up - Sky Engineering Portal</title>
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'site.css' %}" rel="stylesheet">
+</head>
+<body class="auth-page">
+    <div class="min-vh-100 d-flex align-items-center justify-content-center px-3">
+        <div class="auth-box">
+            <h1 class="h3 mb-4">Sign Up</h1>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+
+                <div class="mb-3">
+                    <label for="{{ form.full_name.id_for_label }}" class="form-label">Full Name</label>
+                    <input type="text" name="{{ form.full_name.html_name }}" id="{{ form.full_name.id_for_label }}" class="form-control" value="{{ form.full_name.value|default:'' }}" required>
+                    {{ form.full_name.errors }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.username.id_for_label }}" class="form-label">Username</label>
+                    <input type="text" name="{{ form.username.html_name }}" id="{{ form.username.id_for_label }}" class="form-control" value="{{ form.username.value|default:'' }}" required>
+                    {{ form.username.errors }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.email.id_for_label }}" class="form-label">Email</label>
+                    <input type="email" name="{{ form.email.html_name }}" id="{{ form.email.id_for_label }}" class="form-control" value="{{ form.email.value|default:'' }}" required>
+                    {{ form.email.errors }}
+                </div>
+
+                <div class="mb-3">
+                    <label for="{{ form.password1.id_for_label }}" class="form-label">Password</label>
+                    <input type="password" name="{{ form.password1.html_name }}" id="{{ form.password1.id_for_label }}" class="form-control" required>
+                    {{ form.password1.errors }}
+                </div>
+
+                <div class="mb-4">
+                    <label for="{{ form.password2.id_for_label }}" class="form-label">Confirm password</label>
+                    <input type="password" name="{{ form.password2.html_name }}" id="{{ form.password2.id_for_label }}" class="form-control" required>
+                    {{ form.password2.errors }}
+                </div>
+
+                <button type="submit" class="btn w-100">Sign Up</button>
+            </form>
+
+            <p class="mt-4 mb-0">
+                Already registered?
+                <a href="{% url 'accounts:login' %}">Login</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

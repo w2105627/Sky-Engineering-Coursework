@@ -1,0 +1,54 @@
+<!-- Author : w2105627 -->
+<!DOCTYPE html>
+{% load static %}
+<html>
+<head>
+    <title>Login - Sky Engineering Portal</title>
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'site.css' %}" rel="stylesheet">
+</head>
+<body class="auth-page">
+    <div class="min-vh-100 d-flex align-items-center justify-content-center px-3">
+        <div class="auth-box">
+            <h1 class="h3 mb-4">Login</h1>
+
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="alert alert-{{ message.tags }}">
+                        {{ message }}
+                    </div>
+                {% endfor %}
+            {% endif %}
+
+            <form method="POST">
+                {% csrf_token %}
+
+                {% if form.non_field_errors %}
+                    <div class="alert alert-danger">
+                        {{ form.non_field_errors }}
+                    </div>
+                {% endif %}
+
+                <div class="mb-3">
+                    <label for="{{ form.username.id_for_label }}" class="form-label">Username</label>
+                    <input type="text" name="{{ form.username.html_name }}" id="{{ form.username.id_for_label }}" class="form-control" required>
+                    {{ form.username.errors }}
+                </div>
+
+                <div class="mb-4">
+                    <label for="{{ form.password.id_for_label }}" class="form-label">Password</label>
+                    <input type="password" name="{{ form.password.html_name }}" id="{{ form.password.id_for_label }}" class="form-control" required>
+                    {{ form.password.errors }}
+                </div>
+
+                <button type="submit" class="btn w-100">Login</button>
+            </form>
+
+            <p class="mt-4 mb-0">
+                No account yet?
+                <a href="{% url 'accounts:signup' %}">Sign up</a>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

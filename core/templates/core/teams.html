@@ -1,0 +1,33 @@
+<!-- Author : w2105627 -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>All Teams</h1>
+
+<a href="{% url 'core:create_team' %}" class="btn btn-outline-light">Create Team</a>
+
+<br>
+<br>
+
+<form method="GET" action="{% url 'core:teams' %}">
+    <input type="text" name="q" placeholder="Search for a team" value="{{ q }}">
+    <button type="submit">Search</button>
+</form>
+
+<br>
+
+{% for team in teams %}
+    <div>
+        <a href="{% url 'core:team_detail' team.id %}">
+            {{ team.team_name }} - Department: {{ team.department.department_name }}
+        </a>
+        <br>
+        <br>
+        <br>
+    </div>
+{% empty %}
+    <p>No teams found.</p>
+{% endfor %}
+
+{% endblock %}

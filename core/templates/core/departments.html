@@ -1,0 +1,44 @@
+<!-- Author : w2105627 -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Departments</h1>
+
+<a href="{% url 'core:create_department' %}" class="btn btn-outline-light">Create Department</a>
+
+<br>
+<br>
+
+{% for department in departments %}
+    <div>
+        <h3>{{ department.department_name }}</h3>
+
+        {% if department.organisation %}
+            <p>Organisation: {{ department.organisation.organisation_name }}</p>
+        {% endif %}
+
+        <p>
+            Department Head:
+            {% if department.department_head %}
+                {{ department.department_head.full_name }}
+            {% else %}
+                Not assigned
+            {% endif %}
+        </p>
+
+        {% if department.teams.all %}
+            <p>Teams:</p>
+            {% for team in department.teams.all %}
+                <a href="{% url 'core:team_detail' team.id %}">{{ team.team_name }}</a><br>
+            {% endfor %}
+        {% endif %}
+
+        <br>
+        <br>
+    </div>
+{% empty %}
+    <p>No departments found.</p>
+{% endfor %}
+
+{% endblock %}

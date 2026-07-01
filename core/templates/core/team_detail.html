@@ -1,0 +1,130 @@
+<!-- Author : w2105627 -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="team-detail-page">
+    <div>
+        <a href="{% url 'core:teams' %}" class="btn btn-outline-light">Back to Team search</a>
+        <a href="{% url 'core:edit_team' team.id %}" class="btn btn-outline-light">Edit Team</a>
+        <a href="{% url 'core:delete_team' team.id %}" class="btn btn-outline-light">Delete Team</a>
+        <a href="{% url 'core:schedule_meeting' team.id %}" class="btn btn-outline-light">Schedule Meeting</a>
+    </div>
+
+    <div class="team-detail-grid">
+        <section>
+            <h1>{{ team.team_name }}</h1>
+
+            <p class="team-meta">Department: {{ team.department.department_name }}</p>
+            <p class="team-meta">
+                Manager:
+                {% if team.team_leader %}
+                    {{ team.team_leader.full_name }}
+                {% else %}
+                    Not assigned
+                {% endif %}
+            </p>
+
+            <p><strong>Description:</strong><br>{{ team.team_description|default:'No description available' }}</p>
+            <p><strong>Mission:</strong><br>{{ team.team_mission|default:'No mission added yet' }}</p>
+            <p><strong>Responsibilities:</strong><br>{{ team.responsibilities|default:'No responsibilities added yet' }}</p>
+        </section>
+
+        <section>
+            <h2>Team Members</h2>
+            <ul>
+                {% for member in team.members.all %}
+                    <li>{{ member.full_name }}</li>
+                {% empty %}
+                    <li>No members assigned</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h2>Team Details</h2>
+            <p><strong>Created</strong><br>{{ team.created_at|date:'d/m/Y' }}</p>
+            <p><strong>Status:</strong><br>{{ team.status }}</p>
+            <p>Disbanded: {{ team.disbanded_at|date:'d/m/Y'|default:'N/A' }}</p>
+        </section>
+
+        <section>
+            <h2>Team Skills</h2>
+            <ul>
+                {% for skill in team.skills.all %}
+                    <li>{{ skill.skill_name }}</li>
+                {% empty %}
+                    <li>No skills assigned</li>
+                {% endfor %}
+            </ul>
+        </section>
+
+        <section>
+            <h2>Contact</h2>
+            {% if contact %}
+                {% if contact.team_email %}
+                    <a href="mailto:{{ contact.team_email }}">Email Team</a>
+                {% endif %}
+
+                {% if contact.slack_channel %}
+                    <p class="mt-4">Slack: {{ contact.slack_channel }}</p>
+                {% endif %}
+            {% else %}
+                <p>No contact info available</p>
+            {% endif %}
+        </section>
+
+        <section>
+            <h2>Code Repositories</h2>
+            {% for repo in repositories %}
+                {% if repo.codebase_link %}
+                    <p><a href="{{ repo.codebase_link }}">{{ repo.codebase_link }}</a></p>
+                {% endif %}
+
+                {% if repo.versioning_approach %}
+                    <p><strong>Versioning:</strong><br>{{ repo.versioning_approach }}</p>
+                {% endif %}
+
+                {% if repo.description %}
+                    <p>{{ repo.description }}</p>
+                {% endif %}
+            {% empty %}
+                <p>No repositories added</p>
+            {% endfor %}
+        </section>
+
+        <section>
+            <h2>Dependencies</h2>
+
+            <h3>Upstream</h3>
+            {% for dep in upstream %}
+                <p>{{ dep.upstream_team.team_name }}</p>
+            {% empty %}
+                <p>No upstream dependencies</p>
+            {% endfor %}
+
+            <h3>Downstream</h3>
+            {% for dep in downstream %}
+                <p>{{ dep.downstream_team.team_name }}</p>
+            {% empty %}
+                <p>No downstream dependencies</p>
+            {% endfor %}
+        </section>
+    </div>
+
+    <section class="team-meetings">
+        <h2>Meetings</h2>
+        {% for meeting in meetings %}
+            <p>
+                <strong>{{ meeting.title }}</strong> - {{ meeting.meeting_date }}<br>
+                {{ meeting.meeting_description }}
+            </p>
+            <a href="{% url 'core:edit_meeting' meeting.id %}">Edit meeting</a>
+            <a href="{% url 'core:delete_meeting' meeting.id %}">Delete meeting</a>
+        {% empty %}
+            <p>No meetings scheduled</p>
+        {% endfor %}
+    </section>
+</div>
+
+{% endblock %}

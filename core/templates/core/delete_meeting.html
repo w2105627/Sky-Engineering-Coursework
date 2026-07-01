@@ -1,0 +1,16 @@
+<!-- Author : w2105627 -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Delete Meeting</h1>
+
+<p>Are you sure you want to delete {{ meeting.title }}?</p>
+
+<form method="POST">
+    {% csrf_token %}
+    <button type="submit">Delete Meeting</button>
+    <a href="{% url 'core:team_detail' meeting.team.id %}">Cancel</a>
+</form>
+
+{% endblock %}

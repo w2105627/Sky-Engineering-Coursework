@@ -1,0 +1,27 @@
+<!-- Author : w2105627 -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Profile</h1>
+
+<h2>Update Profile</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ profile_form.as_p }}
+    <button type="submit" name="update_profile">Update Profile</button>
+</form>
+
+<br>
+<br>
+
+<h2>Change Password</h2>
+
+<form method="POST">
+    {% csrf_token %}
+    {{ password_form.as_p }}
+    <button type="submit" name="change_password">Update Password</button>
+</form>
+
+{% endblock %}

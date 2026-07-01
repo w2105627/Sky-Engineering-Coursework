@@ -1,0 +1,30 @@
+<!-- Author : w2105627 -->
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h1>Organisation</h1>
+
+{% for organisation in organisations %}
+    <div>
+        <h3>{{ organisation.organisation_name }}</h3>
+
+        {% if organisation.description %}
+            <p>{{ organisation.description }}</p>
+        {% endif %}
+
+        {% if organisation.departments.all %}
+            <p>Departments:</p>
+            {% for department in organisation.departments.all %}
+                {{ department.department_name }}<br>
+            {% endfor %}
+        {% endif %}
+
+        <br>
+        <br>
+    </div>
+{% empty %}
+    <p>No organisations found.</p>
+{% endfor %}
+
+{% endblock %}

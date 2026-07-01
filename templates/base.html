@@ -1,0 +1,28 @@
+<!-- Author : w2105627 -->
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sky Engineering Teams</title>
+    <link href="{% static 'bootstrap.min.css' %}" rel="stylesheet">
+    <link href="{% static 'site.css' %}" rel="stylesheet">
+</head>
+<body>
+
+    {% include 'navbar.html' %}
+
+    <div class="container page-shell">
+        {% if messages %}
+            {% for message in messages %}
+                <div class="alert alert-{{ message.tags }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+
+        {% block content %}
+        {% endblock %}
+    </div>
+
+</body>
+</html>
