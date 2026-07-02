@@ -2,7 +2,7 @@
 body {
     background: #f5f6f8;
     color: #111111;
-    font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: "Segoe UI", Roboto, Arial, sans-serif;
 }
 
 button,
@@ -20,15 +20,15 @@ a {
     color: #111111;
 }
 
-a:hover {
-    color: #2f80ed;
-}
 
 .page-shell {
     padding-top: 2rem;
     padding-bottom: 4rem;
 }
 
+a:hover {
+    color: #2f80ed;
+}
 .navbar {
     background: #ffffff;
     border-bottom: 1px solid #eeeeee;
@@ -63,9 +63,7 @@ a:hover {
     border-color: transparent;
 }
 
-.navbar .btn[href*="logout"],
-.navbar .btn[href*="login"],
-.navbar .btn[href*="signup"] {
+.navbar .nav-auth-button {
     color: #ffffff;
     background: #000000;
     border-color: #000000;
@@ -73,9 +71,7 @@ a:hover {
     padding: 0.75rem 1.25rem;
 }
 
-.navbar .btn[href*="logout"]:hover,
-.navbar .btn[href*="login"]:hover,
-.navbar .btn[href*="signup"]:hover {
+.navbar .nav-auth-button:hover {
     color: #ffffff;
     background: #2b2b2b;
     border-color: #2b2b2b;
@@ -139,8 +135,7 @@ button[type="submit"]:hover {
     border-color: #000000;
 }
 
-.btn-primary,
-a[href^="mailto:"] {
+.btn-primary {
     display: inline-block;
     color: #ffffff;
     background: #2f80ed;
@@ -150,8 +145,7 @@ a[href^="mailto:"] {
     text-decoration: none;
 }
 
-.btn-primary:hover,
-a[href^="mailto:"]:hover {
+.btn-primary:hover {
     color: #ffffff;
     background: #1f6ed4;
 }
@@ -173,7 +167,6 @@ textarea:focus,
 .form-control:focus,
 .form-select:focus {
     border-color: #2f80ed;
-    box-shadow: 0 0 0 0.2rem rgba(47, 128, 237, 0.18);
 }
 
 .auth-page {

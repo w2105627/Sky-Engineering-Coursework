@@ -10,10 +10,10 @@
             <a class="btn btn-outline-light" href="/admin/">Admin</a>
             {% if user.is_authenticated %}
                 <a class="btn btn-outline-light ms-2" href="{% url 'accounts:profile' %}">Profile</a>
-                <a class="btn btn-outline-light ms-2" href="{% url 'accounts:logout' %}">Logout</a>
+                <a class="btn btn-outline-light nav-auth-button ms-2" href="{% url 'accounts:logout' %}">Logout</a>
             {% else %}
-                <a class="btn btn-outline-light ms-2" href="{% url 'accounts:login' %}">Login</a>
-                <a class="btn btn-outline-light ms-2" href="{% url 'accounts:signup' %}">Sign Up</a>
+                <a class="btn btn-outline-light nav-auth-button ms-2" href="{% url 'accounts:login' %}">Login</a>
+                <a class="btn btn-outline-light nav-auth-button ms-2" href="{% url 'accounts:signup' %}">Sign Up</a>
             {% endif %}
         </div>
     </div>
