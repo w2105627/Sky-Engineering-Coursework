@@ -63,7 +63,7 @@
             <h2>Contact</h2>
             {% if contact %}
                 {% if contact.team_email %}
-                    <a href="mailto:{{ contact.team_email }}">Email Team</a>
+                    <a class="email-button" href="mailto:{{ contact.team_email }}">Email Team</a>
                 {% endif %}
 
                 {% if contact.slack_channel %}

@@ -8,13 +8,7 @@ from .forms import DepartmentForm, MeetingForm, TeamForm
 from django.shortcuts import redirect
 
 
-def log_team_action(user, action_type, team, details):
-    AuditLog.objects.create(
-        user=user,
-        team=team,
-        action_type=action_type,
-        audit_details=details,
-    )
+
 
 
 def root(request):
@@ -130,6 +124,14 @@ def edit_team(request, team_id):
 
     return render(request, 'core/edit_team.html', {'form': form, 'team': team})
 
+#helper func for an audit action on team
+def log_team_action(user, action_type, team, details):
+    AuditLog.objects.create(
+        user=user,
+        team=team,
+        action_type=action_type,
+        audit_details=details,
+    )
 
 @login_required
 def delete_team(request, team_id):

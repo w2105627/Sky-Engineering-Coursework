@@ -14,6 +14,7 @@ class MeetingForm(forms.ModelForm):
         model = Meeting
         fields = ['title', 'meeting_date', 'meeting_description']
 
+#Team Form to handle
 class TeamForm(forms.ModelForm):
     depends_on = forms.ModelMultipleChoiceField(
         queryset=Team.objects.none(),
@@ -39,7 +40,9 @@ class TeamForm(forms.ModelForm):
             'team_mission',
             'responsibilities',
         ]
+    #Revisit lecture8 to ensure this is right
 
+    #code to prevent a team from depending on itself
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         teams = Team.objects.all().order_by('team_name')

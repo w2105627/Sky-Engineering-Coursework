@@ -5,7 +5,7 @@ from django.urls import reverse
 
 from .models import Department, Employee, Organisation, Team
 
-#This section implements all my test cases from CWK1
+
 @override_settings(AUTH_PASSWORD_VALIDATORS=[])
 class CourseworkTestPlanTests(TestCase):
     def setUp(self):
