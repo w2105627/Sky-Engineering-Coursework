@@ -53,16 +53,13 @@ def create_team(request):
 
 @login_required
 def organisation(request):
-    organisations = Organisation.objects.prefetch_related('departments').all()
+    organisations = Organisation.objects.all()
 
     return render(request, 'core/organisation.html', {'organisations': organisations})
 
 @login_required
 def departments(request):
-    departments = Department.objects.select_related(
-        'organisation',
-        'department_head',
-    ).prefetch_related('teams').all()
+    departments = Department.objects.all()
 
     return render(request, 'core/departments.html', {'departments': departments})
 
@@ -124,7 +121,7 @@ def edit_team(request, team_id):
 
     return render(request, 'core/edit_team.html', {'form': form, 'team': team})
 
-#helper func for an audit action on team
+# Creates an audit log entry for team changes.
 def log_team_action(user, action_type, team, details):
     AuditLog.objects.create(
         user=user,

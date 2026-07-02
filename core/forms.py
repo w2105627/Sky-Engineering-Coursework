@@ -13,8 +13,6 @@ class MeetingForm(forms.ModelForm):
     class Meta:
         model = Meeting
         fields = ['title', 'meeting_date', 'meeting_description']
-
-#Team Form to handle
 class TeamForm(forms.ModelForm):
     depends_on = forms.ModelMultipleChoiceField(
         queryset=Team.objects.none(),
@@ -40,9 +38,6 @@ class TeamForm(forms.ModelForm):
             'team_mission',
             'responsibilities',
         ]
-    #Revisit lecture8 to ensure this is right
-
-    #code to prevent a team from depending on itself
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         teams = Team.objects.all().order_by('team_name')
@@ -66,13 +61,13 @@ class TeamForm(forms.ModelForm):
             Dependency.objects.filter(upstream_team=team).delete()
 
         for upstream_team in self.cleaned_data.get('depends_on', []):
-            Dependency.objects.get_or_create(
+            Dependency.objects.create(
                 downstream_team=team,
                 upstream_team=upstream_team,
             )
 
         for downstream_team in self.cleaned_data.get('depended_on_by', []):
-            Dependency.objects.get_or_create(
+            Dependency.objects.create(
                 downstream_team=downstream_team,
                 upstream_team=team,
             )

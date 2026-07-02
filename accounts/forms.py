@@ -41,12 +41,15 @@ class ProfileForm(forms.Form):
         self.user.email = self.cleaned_data['email']
         self.user.save()
 
-        Employee.objects.update_or_create(
-            user=self.user,
-            defaults={
-                'full_name': self.cleaned_data['full_name'],
-            },
-        )
+        try:
+            employee = Employee.objects.get(user=self.user)
+            employee.full_name = self.cleaned_data['full_name']
+            employee.save()
+        except Employee.DoesNotExist:
+            Employee.objects.create(
+                user=self.user,
+                full_name=self.cleaned_data['full_name'],
+            )
 
         return self.user
 

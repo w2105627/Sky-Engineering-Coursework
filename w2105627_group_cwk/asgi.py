@@ -1,4 +1,3 @@
-# Author : w2105627
 """
 ASGI config for w2105627_group_cwk project.
 
